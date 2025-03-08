@@ -1,19 +1,16 @@
 package models;
 
-public class Snake {
-    private final int startPosition;
-    private final int endPosition;
+import java.util.concurrent.ThreadLocalRandom;
 
-    public Snake(int startPosition, int endPosition) {
-        this.startPosition = startPosition;
-        this.endPosition = endPosition;
+public class Snake extends BoardElement{
+
+    public Snake(int limit, int startPosition) {
+        super(limit, startPosition);
     }
 
-    public int getStartPosition() {
-        return startPosition;
+    @Override
+    protected int calculateEndPosition(int limit, int startPosition) {
+        return ThreadLocalRandom.current().nextInt(limit, startPosition);
     }
 
-    public int getEndPosition() {
-        return endPosition;
-    }
 }

@@ -1,19 +1,15 @@
 package models;
 
-public class Ladder {
-    private final int startPosition;
-    private final int endPosition;
+import java.util.concurrent.ThreadLocalRandom;
 
-    public Ladder(int startPosition, int endPosition) {
-        this.startPosition = startPosition;
-        this.endPosition = endPosition;
+public class Ladder extends BoardElement {
+
+    public Ladder(int limit, int startPosition) {
+        super(limit, startPosition);
     }
 
-    public int getStartPosition() {
-        return startPosition;
-    }
-
-    public int getEndPosition() {
-        return endPosition;
+    @Override
+    protected int calculateEndPosition(int limit, int position) {
+        return ThreadLocalRandom.current().nextInt(position + 1, limit);
     }
 }
