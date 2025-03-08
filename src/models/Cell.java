@@ -1,8 +1,8 @@
 package models;
 
 public class Cell {
-    private Snake snake;
-    private Ladder ladder;
+    private final Snake snake;
+    private final Ladder ladder;
 
     public Cell(Snake snake, Ladder ladder) {
         this.snake = snake;
