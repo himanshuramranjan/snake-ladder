@@ -1,11 +1,11 @@
 package models;
 
-public class User {
+public class Player {
     private final int id;
     private String name;
     private int curPosition;
 
-    public User(int id, String name, int curPosition) {
+    public Player(int id, String name, int curPosition) {
         this.id = id;
         this.name = name;
         this.curPosition = curPosition;
