@@ -3,10 +3,25 @@ package models;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Dice {
+
+    public static volatile Dice dice;
     private int diceCount;
 
-    public Dice(int diceCount) {
+    private Dice() {}
+
+    private Dice(int diceCount) {
         this.diceCount = diceCount;
+    }
+
+    public static Dice getInstance(int diceCount) {
+        if(dice == null) {
+            synchronized (Dice.class) {
+                if(dice == null) {
+                    dice = new Dice(diceCount);
+                }
+            }
+        }
+        return dice;
     }
 
     public int getDiceCount() {
