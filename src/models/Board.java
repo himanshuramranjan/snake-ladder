@@ -3,17 +3,30 @@ package models;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Board {
-    private final int boardSize;
-    private final int noOfSnakes;
-    private final int noOfLadders;
+    public volatile static Board board;
+    private Board() {}
+    private int boardSize;
+    private int noOfSnakes;
+    private int noOfLadders;
     private Cell[][] cells;
 
-    public Board(int boardSize, int noOfSnakes, int noOfLadders) {
+    private Board(int boardSize, int noOfSnakes, int noOfLadders) {
         this.boardSize = boardSize;
         this.noOfSnakes = noOfSnakes;
         this.noOfLadders = noOfLadders;
 
         initializeBoard();
+    }
+
+    public static Board getInstance(int boardSize, int noOfSnakes, int noOfLadders) {
+        if(board == null) {
+            synchronized (Board.class) {
+                if(board == null) {
+                    board = new Board(boardSize, noOfSnakes, noOfLadders);
+                }
+            }
+        }
+        return board;
     }
 
     private void initializeBoard() {
