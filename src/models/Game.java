@@ -10,17 +10,17 @@ public class Game {
     private Dice dice;
 
     private Game() {}
-    private Game(int size, int noOfSnakes, int noOfLadders, int diceCount) {
+    private Game(int boardSize, int noOfSnakes, int noOfLadders, int diceCount) {
         this.players = new LinkedList<>();
-        this.board = Board.getInstance(size, noOfSnakes, noOfLadders);
+        this.board = Board.getInstance(boardSize, noOfSnakes, noOfLadders);
         this.dice = Dice.getInstance(diceCount);
     }
 
-    public static Game getInstance(int size, int noOfSnakes, int noOfLadders, int diceCount) {
+    public static Game getInstance(int boardSize, int noOfSnakes, int noOfLadders, int diceCount) {
         if(game == null) {
             synchronized (Game.class) {
                 if(game == null) {
-                    game = new Game(size, noOfSnakes, noOfLadders, diceCount);
+                    game = new Game(boardSize, noOfSnakes, noOfLadders, diceCount);
                 }
             }
         }
@@ -54,6 +54,7 @@ public class Game {
                 System.out.println(player.getName() + " has won the game");
             }
             else {
+                player.setCurPosition(finalPosition);
                 players.add(player);
             }
         }

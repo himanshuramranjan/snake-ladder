@@ -28,10 +28,6 @@ public class Dice {
         return diceCount;
     }
 
-    public void setDiceCount(int diceCount) {
-        this.diceCount = diceCount;
-    }
-
     public int rollDice() {
         int count = this.diceCount;
         int total = 0;
