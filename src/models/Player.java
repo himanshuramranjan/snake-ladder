@@ -5,10 +5,10 @@ public class Player {
     private String name;
     private int curPosition;
 
-    public Player(int id, String name, int curPosition) {
+    public Player(int id, String name) {
         this.id = id;
         this.name = name;
-        this.curPosition = curPosition;
+        this.curPosition = 1;
     }
 
     public void setName(String name) {
