@@ -2,6 +2,8 @@ package models;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import static constants.GameConstants.INITIAL_BOARD_POS;
+
 public class Board {
     public volatile static Board board;
     private Board() {}
@@ -46,7 +48,7 @@ public class Board {
 
         while(count > 0) {
             // generating numbers from 2 as we dont want to put ladders at starting point
-            int cellNum = ThreadLocalRandom.current().nextInt(2, getBoardSize());
+            int cellNum = ThreadLocalRandom.current().nextInt(INITIAL_BOARD_POS + 1, getBoardSize());
             int row = getRowNumber(cellNum);
             int col = getColNumber(cellNum);
 
@@ -63,12 +65,12 @@ public class Board {
 
         while(count > 0) {
             // generating numbers from 2 as we dont want to put snakes at starting point
-            int cellNum = ThreadLocalRandom.current().nextInt(2, getBoardSize());
+            int cellNum = ThreadLocalRandom.current().nextInt(INITIAL_BOARD_POS + 1, getBoardSize());
             int row = getRowNumber(cellNum);
             int col = getColNumber(cellNum);
 
             if(cells[row][col] == null) {
-                BoardElement snake = new Snake(1, cellNum);
+                BoardElement snake = new Snake(INITIAL_BOARD_POS, cellNum);
                 cells[row][col].setBoardElement(snake);
                 count--;
             }

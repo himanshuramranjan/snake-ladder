@@ -2,6 +2,8 @@ package models;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+import static constants.GameConstants.DICE_LIMIT;
+
 public class Dice {
 
     public static volatile Dice dice;
@@ -33,7 +35,7 @@ public class Dice {
         int total = 0;
 
         while (count-- > 0) {
-            total += ThreadLocalRandom.current().nextInt(1,7);
+            total += ThreadLocalRandom.current().nextInt(1,DICE_LIMIT + 1);
         }
         return total;
     }
