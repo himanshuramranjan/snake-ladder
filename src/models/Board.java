@@ -75,7 +75,10 @@ public class Board {
         }
     }
 
-    public int getFinalPosition(int currPosition) {
+    public int getFinalPosition(int currPosition, int moves) {
+        if(moves + currPosition > boardSize) return currPosition;
+
+        currPosition += moves;
         int row = getRowNumber(currPosition);
         int col = getColNumber(currPosition);
         int finalPosition = currPosition;
