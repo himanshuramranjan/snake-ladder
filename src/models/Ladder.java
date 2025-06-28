@@ -10,6 +10,6 @@ public class Ladder extends BoardElement {
 
     @Override
     protected int calculateEndPosition(int limit, int position) {
-        return ThreadLocalRandom.current().nextInt(position + 1, limit);
+        return ThreadLocalRandom.current().nextInt(position + 1, limit + 1);
     }
 }

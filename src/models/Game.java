@@ -39,7 +39,7 @@ public class Game {
         // play the game until last 2 players
         while(players.size() > 1) {
             // get the player
-            Player player = players.getFirst();
+            Player player = players.pollFirst();
             System.out.println(player.getName() + " turn to roll dice");
 
             // roll the dice to get the count

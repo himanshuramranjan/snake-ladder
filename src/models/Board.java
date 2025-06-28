@@ -10,7 +10,7 @@ public class Board {
     private int boardSize;
     private int noOfSnakes;
     private int noOfLadders;
-    private Cell[][] cells;
+    private BoardElement[][] cells;
 
     private Board(int boardSize, int noOfSnakes, int noOfLadders) {
         this.boardSize = boardSize;
@@ -32,11 +32,7 @@ public class Board {
     }
 
     private void initializeBoard() {
-        cells = new Cell[getBoardSize()][getBoardSize()];
-
-        for(int i = 1; i <= getBoardSize(); i++) {
-            cells[getRowNumber(i)][getColNumber(i)] = new Cell();
-        }
+        cells = new BoardElement[getBoardSize()][getBoardSize()];
 
         initializeSnakesOnBoard();
         initializeLaddersOnBoard();
@@ -53,8 +49,7 @@ public class Board {
             int col = getColNumber(cellNum);
 
             if(cells[row][col] == null) {
-                Ladder ladder = new Ladder(getBoardSize(), cellNum);
-                cells[row][col].setBoardElement(ladder);
+                cells[row][col] = new Ladder(getBoardSize(), cellNum);
                 count--;
             }
         }
@@ -70,8 +65,7 @@ public class Board {
             int col = getColNumber(cellNum);
 
             if(cells[row][col] == null) {
-                BoardElement snake = new Snake(INITIAL_BOARD_POS, cellNum);
-                cells[row][col].setBoardElement(snake);
+                cells[row][col] = new Snake(INITIAL_BOARD_POS, cellNum);
                 count--;
             }
         }
@@ -86,12 +80,12 @@ public class Board {
         int finalPosition = currPosition;
 
         if(cells[row][col] != null) {
-            if(cells[row][col].getBoardElement() instanceof Snake)
+            if(cells[row][col] instanceof Snake)
                 System.out.println("Snake bit at the position :" + currPosition);
             else
                 System.out.println("Climbed the ladder at position : " + currPosition);
 
-            finalPosition = cells[row][col].getBoardElement().getEndPosition();
+            finalPosition = cells[row][col].getEndPosition();
         }
 
         return finalPosition;
