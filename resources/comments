@@ -1,0 +1,9 @@
+> Having a 'Normal' class to represent the board elements other than snake and ladder
+
+A normal class (extending the BoardElement) can be added to represent the board cells,
+using which we can replace the null check for regular cells of the board. The method
+'getEndPosition()' can be overridden to return the startPosition in this class.
+
+The disadvantage will be more mem consumption, as now only snake and ladder
+classes are being init now and are assigned memory. In the case of 'Normal' class, we have
+to define the object for each normal cell
