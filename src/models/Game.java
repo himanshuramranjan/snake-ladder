@@ -10,17 +10,17 @@ public class Game {
     private Dice dice;
 
     private Game() {}
-    private Game(int boardSize, int noOfSnakes, int noOfLadders, int diceCount) {
+    private Game(int boardSize, int noOfSnakes, int noOfLadders) {
         this.players = new LinkedList<>();
         this.board = Board.getInstance(boardSize, noOfSnakes, noOfLadders);
-        this.dice = Dice.getInstance(diceCount);
+        this.dice = Dice.getInstance();
     }
 
-    public static Game getInstance(int boardSize, int noOfSnakes, int noOfLadders, int diceCount) {
+    public static Game getInstance(int boardSize, int noOfSnakes, int noOfLadders) {
         if(game == null) {
             synchronized (Game.class) {
                 if(game == null) {
-                    game = new Game(boardSize, noOfSnakes, noOfLadders, diceCount);
+                    game = new Game(boardSize, noOfSnakes, noOfLadders);
                 }
             }
         }
