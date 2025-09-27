@@ -7,3 +7,8 @@ using which we can replace the null check for regular cells of the board. The me
 The disadvantage will be more mem consumption, as now only snake and ladder
 classes are being init now and are assigned memory. In the case of 'Normal' class, we have
 to define the object for each normal cell
+
+> Dice can be a normal class
+
+To extend the game to have multiple dices, we can make the Dice a normal class (not singleton)
+and based on the input can create multiple instances based on the input
