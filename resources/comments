@@ -8,7 +8,36 @@ The disadvantage will be more mem consumption, as now only snake and ladder
 classes are being init now and are assigned memory. In the case of 'Normal' class, we have
 to define the object for each normal cell
 
-> Dice can be a normal class
+> Dice with configurable counts
 
-To extend the game to have multiple dices, we can make the Dice a normal class (not singleton)
-and based on the input can create multiple instances based on the input
+Approach 1 : To extend the game to have multiple dices, we can have either a variable on board which
+will call the rollDice() method of the same Dice 'n' times
+
+Approach 2 : Implement the class with diceCount
+
+public class Dice {
+    private int diceCount;
+    private boolean initialized = false;
+
+    private Dice() {}
+
+    private static class DiceHelper {
+        private static final Dice INSTANCE = new Dice();
+    }
+
+    public static Dice getInstance() {
+        return DiceHelper.INSTANCE;
+    }
+
+    public synchronized void initialize(int diceCount) {
+        if (initialized) {
+            throw new IllegalStateException("Already initialized");
+        }
+        this.diceCount = diceCount;
+        this.initialized = true;
+    }
+}
+
+// Usage:
+Dice dice = Dice.getInstance();
+dice.initialize(6);
