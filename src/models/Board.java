@@ -5,30 +5,17 @@ import java.util.concurrent.ThreadLocalRandom;
 import static constants.GameConstants.INITIAL_BOARD_POS;
 
 public class Board {
-    public volatile static Board board;
-    private Board() {}
     private int boardSize;
     private int noOfSnakes;
     private int noOfLadders;
     private BoardElement[][] cells;
 
-    private Board(int boardSize, int noOfSnakes, int noOfLadders) {
+    public Board(int boardSize, int noOfSnakes, int noOfLadders) {
         this.boardSize = boardSize;
         this.noOfSnakes = noOfSnakes;
         this.noOfLadders = noOfLadders;
 
         initializeBoard();
-    }
-
-    public static Board getInstance(int boardSize, int noOfSnakes, int noOfLadders) {
-        if(board == null) {
-            synchronized (Board.class) {
-                if(board == null) {
-                    board = new Board(boardSize, noOfSnakes, noOfLadders);
-                }
-            }
-        }
-        return board;
     }
 
     private void initializeBoard() {

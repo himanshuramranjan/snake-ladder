@@ -1,34 +1,35 @@
 package models;
 
 import java.util.Deque;
-import java.util.LinkedList;
 
 public class Game {
-    public static volatile Game game;
-    private Deque<Player> players;
-    private Board board;
-    private Dice dice;
+    private static Game instance;
+    private final Deque<Player> players;
+    private final Board board;
+    private final Dice dice;
 
-    private Game() {}
-    private Game(int boardSize, int noOfSnakes, int noOfLadders) {
-        this.players = new LinkedList<>();
-        this.board = Board.getInstance(boardSize, noOfSnakes, noOfLadders);
-        this.dice = Dice.getInstance();
+    // Private constructor to prevent direct instantiation
+    private Game(Deque<Player> players, Board board, Dice dice) {
+        this.players = players;
+        this.board = board;
+        this.dice = dice;
     }
 
-    public static Game getInstance(int boardSize, int noOfSnakes, int noOfLadders) {
-        if(game == null) {
-            synchronized (Game.class) {
-                if(game == null) {
-                    game = new Game(boardSize, noOfSnakes, noOfLadders);
-                }
-            }
+    // Thread-safe one-time initialization
+    public static synchronized void initialize(Deque<Player> players, Board board, Dice dice) {
+        if (instance == null) {
+            instance = new Game(players, board, dice);
+        } else {
+            throw new IllegalStateException("Game is already initialized!");
         }
-        return game;
     }
 
-    public void addPlayers(int id, String name) {
-        this.players.add(new Player(id, name));
+    // Get the singleton instance
+    public static Game getInstance() {
+        if (instance == null) {
+            throw new IllegalStateException("Game is not initialized yet! Please initialize first");
+        }
+        return instance;
     }
 
     public void startGame() {

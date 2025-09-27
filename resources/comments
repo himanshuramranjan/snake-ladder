@@ -41,3 +41,14 @@ public class Dice {
 // Usage:
 Dice dice = Dice.getInstance();
 dice.initialize(6);
+
+
+> Comments on the Design of Game Class
+
+If you need runtime config + singleton, the best practice is a two-step initialization pattern
+
+initialize(config) → must be called exactly once, usually at app startup.
+getInstance() → used everywhere else.
+
+If initialization is done frequently or lazily in many threads, then double-checked locking is more efficient.
+But here, initialize() is usually called once at app startup → synchronized overhead doesn’t matter.
